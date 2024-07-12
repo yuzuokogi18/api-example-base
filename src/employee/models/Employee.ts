@@ -1,6 +1,6 @@
 export interface Employee {
     employee_id: number | null;
-    name: string;
+    name: string ;
     number: string;
     address: string;
     age: number;
@@ -10,6 +10,6 @@ export interface Employee {
     created_by: string;
     updated_at: String;
     updated_by: string;
-    deleted: number;
+    deleted?: boolean | null;
   }
   

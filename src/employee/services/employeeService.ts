@@ -37,9 +37,9 @@ export class employeeService {
             employee.updated_at = DateUtils.formatDate(new Date());
 
             // Asegurarse de que los campos opcionales se manejen correctamente
-            // if (employee.deleted === undefined) {
-            //     Employee.deleted = null; 
-            // }
+            if (employee.deleted === undefined) {
+                employee.deleted = null; 
+         }
 
             return await EmployeeRepository.createEmployee(employee);
         } catch (error: any) {
