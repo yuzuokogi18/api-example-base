@@ -10,10 +10,7 @@ import employeeRoutes from './employee/routes/employeeRoutes';
 // Importar middlewares compartidos
 import { errorHandler } from './shared/middlewares/errorHandler';
 import { notFoundHandler } from './shared/middlewares/notFoundHandler';
-import userRoutes from './user/routes/userRoutes';
-import unitsRoutes from './units/routes/unitsRoutes';
-import ubicRoutes from './ubic/routes/ubicRoutes';
-import bitacoraRoutes from './bitacora/routes/bitacoraRoutes';
+
 
 // Configuración de variables de entorno
 dotenv.config();
@@ -29,10 +26,7 @@ app.use(cors())
 
 // Rutas de los módulos
 app.use('/api/employee', employeeRoutes);
-app.use('/api/user',userRoutes);
-app.use('/api/units',unitsRoutes);
-app.use('/api/ubic',ubicRoutes);
-app.use('/api/bitacora',bitacoraRoutes);
+
 
 
 // Middleware para manejar rutas no encontradas
