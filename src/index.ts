@@ -3,7 +3,8 @@ import bodyParser from 'body-parser';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 // Importar rutas de módulos
-import employeeRoutes from './employee/routes/employeeRoutes';
+//import employeeRoutes from './employee/routes/employeeRoutes';
+import userRoutes from './user/routes/userRoutes';
 
 
 
@@ -25,7 +26,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
 // Rutas de los módulos
-app.use('/api/employee', employeeRoutes);
+//app.use('/api/employee', employeeRoutes);
+app.use('/api/user',userRoutes);
 
 
 
