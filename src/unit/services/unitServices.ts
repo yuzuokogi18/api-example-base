@@ -39,7 +39,6 @@ export class UnitService {
             if (unitFound) {
                 if (unitData.name) unitFound.name = unitData.name;
                 if (unitData.series) unitFound.series = unitData.series;
-                if (unitData.phone_number) unitFound.phone_number = unitData.phone_number;
                 if (unitData.marca !== undefined) unitFound.marca = unitData.marca;
                 if (unitData.placa !== undefined) unitFound.placa = unitData.placa;
                 if (unitData.deleted !== undefined) unitFound.deleted = unitData.deleted;
