@@ -7,6 +7,7 @@ import cors from 'cors';
 import userRoutes from './user/routes/userRoutes';
 
 import unitRoutes from './unit/routes/unitRoutes';
+import employeeRoutes from './employees/routes/employeesRoutes';
 
 // Importar middlewares compartidos
 import { errorHandler } from './shared/middlewares/errorHandler';
@@ -29,6 +30,7 @@ app.use(cors())
 //app.use('/api/employee', employeeRoutes);
 app.use('/api/user',userRoutes);
 app.use('/api/unit',unitRoutes);
+app.use('/api/employees',employeeRoutes);
 
 
 

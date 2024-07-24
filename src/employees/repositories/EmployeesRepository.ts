@@ -35,9 +35,9 @@ export class EmployeesRepository {
   }
 
   public static async createEmployee(employee: Employees): Promise<Employees> {
-    const query = 'INSERT INTO employees (name, position, department, user_id, created_at, updated_at, deleted) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO employees (name, position,  user_id, created_at, updated_at, deleted) VALUES ( ?, ?, ?, ?, ?, ?)';
     return new Promise((resolve, reject) => {
-      connection.execute(query, [employee.name, employee.position, employee.department, employee.user_id, employee.created_at, employee.updated_at, employee.deleted], (error, result: ResultSetHeader) => {
+      connection.execute(query, [employee.name, employee.position, employee.user_id, employee.created_at, employee.updated_at, employee.deleted], (error, result: ResultSetHeader) => {
         if (error) {
           reject(error);
         } else {
@@ -50,9 +50,9 @@ export class EmployeesRepository {
   }
 
   public static async updateEmployee(employees_id: number, employeeData: Employees): Promise<Employees | null> {
-    const query = 'UPDATE employees SET name = ?, position = ?, department = ?, user_id = ?, updated_at = ?, deleted = ? WHERE employees_id = ?';
+    const query = 'UPDATE employees SET name = ?, position = ?,  user_id = ?, updated_at = ?, deleted = ? WHERE employees_id = ?';
     return new Promise((resolve, reject) => {
-      connection.execute(query, [employeeData.name, employeeData.position, employeeData.department, employeeData.user_id, employeeData.updated_at, employeeData.deleted, employees_id], (error, result: ResultSetHeader) => {
+      connection.execute(query, [employeeData.name, employeeData.position,  employeeData.user_id, employeeData.updated_at, employeeData.deleted, employees_id], (error, result: ResultSetHeader) => {
         if (error) {
           reject(error);
         } else {

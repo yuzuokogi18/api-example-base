@@ -39,7 +39,6 @@ export class EmployeesService {
             if (employeeFound) {
                 if (employeeData.name) employeeFound.name = employeeData.name;
                 if (employeeData.position) employeeFound.position = employeeData.position;
-                if (employeeData.department !== undefined) employeeFound.department = employeeData.department;
                 if (employeeData.user_id !== undefined) employeeFound.user_id = employeeData.user_id;
                 if (employeeData.deleted !== undefined) employeeFound.deleted = employeeData.deleted;
                 
