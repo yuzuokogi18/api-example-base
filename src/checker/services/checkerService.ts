@@ -1,6 +1,6 @@
-import { CheckerRepository } from "../repositories/CheckerRepostory";
-import { Checker } from "../models/Checker";
-import { DateUtils } from "../../shared/utils/DateUtils";
+import { CheckerRepository } from '../repositories/CheckerRepostory';
+import { Checker } from '../models/Checker';
+import { DateUtils } from '../../shared/utils/DateUtils';
 
 export class CheckerService {
   public static async getAllCheckers(): Promise<Checker[]> {
@@ -19,7 +19,7 @@ export class CheckerService {
     }
   }
 
-  public static async addChecker(checker: Checker) {
+  public static async addChecker(checker: Checker): Promise<Checker> {
     try {
       checker.created_at = DateUtils.formatDate(new Date());
       checker.updated_at = DateUtils.formatDate(new Date());
@@ -29,17 +29,17 @@ export class CheckerService {
     }
   }
 
-  public static async modifyChecker(checkerId: number, checkerData: Checker) {
+  public static async modifyChecker(checkerId: number, checkerData: Checker): Promise<Checker | null> {
     try {
       const checkerFound = await CheckerRepository.findById(checkerId);
 
       if (checkerFound) {
         if (checkerData.user_id) checkerFound.user_id = checkerData.user_id;
         if (checkerData.user_unit_id) checkerFound.user_unit_id = checkerData.user_unit_id;
-        if (checkerData.arrivaltime !== undefined) checkerFound.arrivaltime = checkerData.arrivaltime;
-        if (checkerData.departuretime !== undefined) checkerFound.departuretime = checkerData.departuretime;
+        if (checkerData.arrivaltime) checkerFound.arrivaltime = checkerData.arrivaltime;
+        if (checkerData.departuretime) checkerFound.departuretime = checkerData.departuretime;
         if (checkerData.deleted !== undefined) checkerFound.deleted = checkerData.deleted;
-
+        
         checkerFound.updated_at = DateUtils.formatDate(new Date());
         return await CheckerRepository.updateChecker(checkerId, checkerFound);
       } else {

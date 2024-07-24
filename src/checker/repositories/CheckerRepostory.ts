@@ -3,10 +3,10 @@ import connection from '../../shared/config/database';
 import { Checker } from '../models/Checker';
 
 export class CheckerRepository {
-  
+
   public static async findAll(): Promise<Checker[]> {
     return new Promise((resolve, reject) => {
-      connection.query('SELECT * FROM checker', (error, results) => {
+      connection.query('SELECT * FROM checker', (error: any, results) => {
         if (error) {
           reject(error);
         } else {
@@ -19,7 +19,7 @@ export class CheckerRepository {
 
   public static async findById(checker_id: number): Promise<Checker | null> {
     return new Promise((resolve, reject) => {
-      connection.query('SELECT * FROM checker WHERE checker_id = ?', [checker_id], (error, results) => {
+      connection.query('SELECT * FROM checker WHERE checker_id = ?', [checker_id], (error: any, results) => {
         if (error) {
           reject(error);
         } else {
