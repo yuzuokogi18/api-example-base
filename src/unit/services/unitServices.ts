@@ -42,6 +42,7 @@ export class UnitService {
                 if (unitData.series) unitFound.series = unitData.series;
                 if (unitData.marca !== undefined) unitFound.marca = unitData.marca;
                 if (unitData.placa !== undefined) unitFound.placa = unitData.placa;
+                if(unitData.numerounidad !== undefined) unitFound.numerounidad = unitData.numerounidad;
                 if (unitData.deleted !== undefined) unitFound.deleted = unitData.deleted;
                 
                 unitFound.updated_at = DateUtils.formatDate(new Date());

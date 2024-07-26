@@ -35,9 +35,9 @@ export class UnitRepository {
   }
 
   public static async createUnit(unit: Unit): Promise<Unit> {
-    const query = 'INSERT INTO unit (name, series,  marca, placa, created_at, updated_at, deleted) VALUES ( ?, ?, ?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO unit (name, series,  marca, placa,numerounidad, created_at, updated_at, deleted) VALUES ( ?, ?, ?, ?, ?, ?, ?,?)';
     return new Promise((resolve, reject) => {
-      connection.execute(query, [unit.name, unit.series, unit.marca, unit.placa, unit.created_at, unit.updated_at, unit.deleted], (error, result: ResultSetHeader) => {
+      connection.execute(query, [unit.name, unit.series, unit.marca, unit.placa,unit.numerounidad, unit.created_at, unit.updated_at, unit.deleted], (error, result: ResultSetHeader) => {
         if (error) {
           reject(error);
         } else {
@@ -50,9 +50,9 @@ export class UnitRepository {
   }
 
   public static async updateUnit(unit_id: number, unitData: Unit): Promise<Unit | null> {
-    const query = 'UPDATE unit SET name = ?, series = ?,  marca = ?, placa = ?, updated_at = ?, deleted = ? WHERE unit_id = ?';
+    const query = 'UPDATE unit SET name = ?, series = ?,  marca = ?, placa = ?,numerounidad = ?, updated_at = ?, deleted = ? WHERE unit_id = ?';
     return new Promise((resolve, reject) => {
-      connection.execute(query, [unitData.name, unitData.series,  unitData.marca, unitData.placa, unitData.updated_at, unitData.deleted, unit_id], (error, result: ResultSetHeader) => {
+      connection.execute(query, [unitData.name, unitData.series,  unitData.marca, unitData.placa,unitData.numerounidad, unitData.updated_at, unitData.deleted, unit_id], (error, result: ResultSetHeader) => {
         if (error) {
           reject(error);
         } else {
