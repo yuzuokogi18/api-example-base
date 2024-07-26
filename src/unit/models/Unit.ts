@@ -4,7 +4,7 @@ export interface Unit {
     series: string;
     marca: number;
     placa: number;
-    numerounidad:number;
+    numerounidad:string;
     created_at: string;
     updated_at: string;
     deleted?: boolean; 
