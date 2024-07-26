@@ -68,6 +68,7 @@ export class userService {
             user.created_at = DateUtils.formatDate(new Date());
             user.updated_at = DateUtils.formatDate(new Date());
             user.password = await bcrypt.hash(user.password, salt);
+            user.deleted = false;
             return await UserRepository.createUser(user);
         } catch (error: any) {
             throw new Error(`Error creating user: ${error.message}`);
