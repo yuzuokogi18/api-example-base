@@ -26,6 +26,7 @@ export class UnitService {
         try {
             unit.created_at = DateUtils.formatDate(new Date());
             unit.updated_at = DateUtils.formatDate(new Date());
+            unit.deleted = false;
             return await UnitRepository.createUnit(unit);
         } catch (error: any) {
             throw new Error(`Error al crear unidad: ${error.message}`);
