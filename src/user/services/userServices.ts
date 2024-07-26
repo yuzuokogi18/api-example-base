@@ -78,10 +78,13 @@ export class userService {
         try{
             const userFound =  await UserRepository.findById(userId);
             const salt = await bcrypt.genSalt(saltRounds);
-
+    
             if(userFound){
                 if(userData.name){
                     userFound.name = userData.name;
+                }
+                if(userData.email){
+                    userFound.email = userData.email;
                 }
                 if(userData.password){
                     userFound.password = await bcrypt.hash(userData.password, salt);
@@ -101,13 +104,5 @@ export class userService {
             throw new Error(`Error updating user: ${error.message}`);
         }
     }
-
-    public static async deleteUser(userId: number): Promise<boolean> {
-        try{
-            return await UserRepository.deleteUser(userId);
-        }catch (error: any){
-            throw new Error(`Error deleting user: ${error.message}`);
-        }
-    }
-
+    
 }
