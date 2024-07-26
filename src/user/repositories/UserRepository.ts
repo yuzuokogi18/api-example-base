@@ -6,7 +6,7 @@ export class UserRepository {
 
   public static async findAll(): Promise<User[]> {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT user_id, firstname, lastname, address, phone_number, email, age, role_id, username, password, created_at, updated_at, deleted FROM user', (error: any, results) => {
+        connection.query('SELECT user_id, firstname, lastname,  phone_number, email, role_id, username, password, created_at, updated_at, deleted FROM user', (error: any, results) => {
             if (error) {
                 reject(error);
             } else {
@@ -52,9 +52,9 @@ export class UserRepository {
   }
 
   public static async createUser(user: User): Promise<User> {
-    const query = 'INSERT INTO user (firstname, lastname, address, phone_number, email, age, role_id, username, password, created_at, updated_at, deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO user (firstname, lastname,  phone_number, email,  role_id, username, password, created_at, updated_at, deleted) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     return new Promise((resolve, reject) => {
-        connection.execute(query, [user.firstname, user.lastname, user.address, user.phone_number, user.email, user.age, user.role_id, user.username, user.password, user.created_at, user.updated_at, user.deleted], (error, result: ResultSetHeader) => {
+        connection.execute(query, [user.firstname, user.lastname,  user.phone_number, user.email,  user.role_id, user.username, user.password, user.created_at, user.updated_at, user.deleted], (error, result: ResultSetHeader) => {
             if (error) {
                 reject(error);
             } else {
@@ -67,9 +67,9 @@ export class UserRepository {
   }
 
   public static async updateUser(user_id: number, userData: User): Promise<User | null> {
-    const query = 'UPDATE user SET firstname = ?, lastname = ?, address = ?, phone_number = ?, email = ?, age = ?, role_id = ?, username = ?, password = ?, updated_at = ?, deleted = ? WHERE user_id = ?';
+    const query = 'UPDATE user SET firstname = ?, lastname = ?,  phone_number = ?, email = ?,  role_id = ?, username = ?, password = ?, updated_at = ?, deleted = ? WHERE user_id = ?';
     return new Promise((resolve, reject) => {
-        connection.execute(query, [userData.firstname, userData.lastname, userData.address, userData.phone_number, userData.email, userData.age, userData.role_id, userData.username, userData.password, userData.updated_at, userData.deleted, user_id], (error, result: ResultSetHeader) => {
+        connection.execute(query, [userData.firstname, userData.lastname,  userData.phone_number, userData.email,  userData.role_id, userData.username, userData.password, userData.updated_at, userData.deleted, user_id], (error, result: ResultSetHeader) => {
             if (error) {
                 reject(error);
             } else {

@@ -2,10 +2,8 @@ export interface User {
     user_id: number;
     lastname: string;
     firstname:string;
-    address: string;
     phone_number: string;
     email:string;
-    age: number;
     role_id: number;
     username: string;
     password: string;
