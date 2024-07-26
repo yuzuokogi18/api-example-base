@@ -80,8 +80,8 @@ export class userService {
             const salt = await bcrypt.genSalt(saltRounds);
 
             if(userFound){
-                if(userData.name){
-                    userFound.name = userData.name;
+                if(userData.lastname){
+                    userFound.lastname = userData.lastname;
                 }
                 if(userData.password){
                     userFound.password = await bcrypt.hash(userData.password, salt);
