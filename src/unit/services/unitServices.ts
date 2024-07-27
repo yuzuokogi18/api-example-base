@@ -44,6 +44,7 @@ export class UnitService {
                 if (unitData.placa !== undefined) unitFound.placa = unitData.placa;
                 if(unitData.numeroUnidad !== undefined) unitFound.numeroUnidad = unitData.numeroUnidad;
                 if (unitData.deleted !== undefined) unitFound.deleted = unitData.deleted;
+                if (unitData.unit_id !== undefined) unitFound.unit_id = unitData.unit_id
                 
                 unitFound.updated_at = DateUtils.formatDate(new Date());
                 return await UnitRepository.updateUnit(unitId, unitFound);

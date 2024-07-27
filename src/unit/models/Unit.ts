@@ -1,5 +1,5 @@
 export interface Unit {
-    unit_id: number;
+    unit_id?: number;
     name: string;
     series: string;
     marca: number;
