@@ -65,14 +65,18 @@ export class UserRepository {
         });
     });
   }
-
   public static async updateUser(user_id: number, userData: User): Promise<User | null> {
-    const query = 'UPDATE user SET firstname = ?, lastname = ?,  phone_number = ?, email = ?,  role_id = ?, username = ?, password = ?, updated_at = ?, deleted = ? WHERE user_id = ?';
+    const query = 'UPDATE user SET firstname = ?, lastname = ?, phone_number = ?, email = ?, role_id = ?, username = ?, password = ?, updated_at = ?, deleted = ? WHERE user_id = ?';
     return new Promise((resolve, reject) => {
-        connection.execute(query, [userData.firstname, userData.lastname,  userData.phone_number, userData.email,  userData.role_id, userData.username, userData.password, userData.updated_at, userData.deleted, user_id], (error, result: ResultSetHeader) => {
+        console.log("Executing query:", query);
+        console.log("With parameters:", [userData.firstname, userData.lastname, userData.phone_number, userData.email, userData.role_id, userData.username, userData.password, userData.updated_at, userData.deleted, user_id]);
+        
+        connection.execute(query, [userData.firstname, userData.lastname, userData.phone_number, userData.email, userData.role_id, userData.username, userData.password, userData.updated_at, userData.deleted, user_id], (error, result: ResultSetHeader) => {
             if (error) {
+                console.error("Error executing query:", error);
                 reject(error);
             } else {
+                console.log("Query result:", result);
                 if (result.affectedRows > 0) {
                     const updatedUser: User = { ...userData, user_id: user_id };
                     resolve(updatedUser);
@@ -82,7 +86,8 @@ export class UserRepository {
             }
         });
     });
-  }
+}
+
 
   public static async deleteUser(user_id: number): Promise<boolean> {
     const query = 'DELETE FROM user WHERE user_id = ?';
