@@ -13,10 +13,10 @@ const saltRounds = 10;
 
 export class userService {
 
-    public static async login(username: string, password: string){
-        try{
+    public static async login(username: string, password: string) {
+        try {
             const user = await this.getUserByUsername(username);
-            if(!user){
+            if (!user) {
                 return null;
             }
             const passwordMatch = await bcrypt.compare(password, user.password);
@@ -32,32 +32,31 @@ export class userService {
             }
             return await jwt.sign(payload, secretKey, { expiresIn: '5m' });
 
-        }catch (error: any){
+        } catch (error: any) {
             throw new Error(`Error logging in: ${error.message}`);
         }
-
     }
 
     public static async getAllUsers(): Promise<User[]> {
-        try{
+        try {
             return await UserRepository.findAll();
-        }catch (error: any){
+        } catch (error: any) {
             throw new Error(`Error getting users: ${error.message}`);
         }
     }
 
     public static async getUserById(userId: number): Promise<User | null> {
-        try{
+        try {
             return await UserRepository.findById(userId);
-        }catch (error: any){
+        } catch (error: any) {
             throw new Error(`Error finding user: ${error.message}`);
         }
     }
 
     public static async getUserByUsername(username: string): Promise<User | null> {
-        try{
+        try {
             return await UserRepository.findByUsername(username);
-        }catch (error: any){
+        } catch (error: any) {
             throw new Error(`Error finding user: ${error.message}`);
         }
     }
@@ -75,40 +74,42 @@ export class userService {
         }
     }
 
-    public static async modifyUser(userId: number, userData: User){
-        try{
-            const userFound =  await UserRepository.findById(userId);
+    public static async modifyUser(userId: number, userData: User) {
+        try {
+            const userFound = await UserRepository.findById(userId);
             const salt = await bcrypt.genSalt(saltRounds);
 
-            if(userFound){
-                if(userData.lastname){
+            if (userFound) {
+                if (userData.firstname) {
+                    userFound.firstname = userData.firstname;
+                }
+                if (userData.lastname) {
                     userFound.lastname = userData.lastname;
                 }
-                if(userData.password){
+                if (userData.password) {
                     userFound.password = await bcrypt.hash(userData.password, salt);
                 }
-                if(userData.role_id){
+                if (userData.role_id) {
                     userFound.role_id = userData.role_id;
                 }
-                if(userData.deleted !== undefined){
+                if (userData.deleted !== undefined) {
                     userFound.deleted = userData.deleted;
                 }
-            }else{
+                userFound.updated_at = DateUtils.formatDate(new Date());
+                return await UserRepository.updateUser(userId, userFound);
+            } else {
                 return null;
             }
-            userFound.updated_at = DateUtils.formatDate(new Date());
-            return await UserRepository.updateUser(userId, userFound);
-        }catch (error: any){
+        } catch (error: any) {
             throw new Error(`Error updating user: ${error.message}`);
         }
     }
 
     public static async deleteUser(userId: number): Promise<boolean> {
-        try{
+        try {
             return await UserRepository.deleteUser(userId);
-        }catch (error: any){
+        } catch (error: any) {
             throw new Error(`Error deleting user: ${error.message}`);
         }
     }
-
 }
