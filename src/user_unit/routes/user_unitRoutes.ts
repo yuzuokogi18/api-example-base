@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getUserUnits, getUserUnitById, createUserUnit, updateUserUnit, deleteUserUnit } from '../controllers/user_unitControllers';
+import { getUserUnits, getUserUnitById, createUserUnit, updateUserUnit, deleteUserUnit } from '../controllers/user_unitcontrollers';
 import { authMiddleware } from '../../shared/middlewares/auth';
 
 const userUnitRoutes: Router = Router();
