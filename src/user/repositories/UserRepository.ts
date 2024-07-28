@@ -33,10 +33,10 @@ export class UserRepository {
         });
     });
   }
-
   public static async findByUsername(username: string): Promise<User | null> {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM user WHERE username = ?', [username], (error: any, results) => {
+        const query = 'SELECT * FROM user WHERE username = ?';
+        connection.query(query, [username], (error, results) => {
             if (error) {
                 reject(error);
             } else {
@@ -49,7 +49,8 @@ export class UserRepository {
             }
         });
     });
-  }
+}
+
 
   public static async createUser(user: User): Promise<User> {
     const query = 'INSERT INTO user (firstname, lastname,  phone_number, email,  role_id, username, password, created_at, updated_at, deleted) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';

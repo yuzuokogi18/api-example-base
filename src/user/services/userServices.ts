@@ -122,4 +122,13 @@ export class userService {
             throw new Error(`Error deleting user: ${error.message}`);
         }
     }
+
+    public static async usernameExists(username: string): Promise<boolean> {
+        try {
+            const user = await UserRepository.findByUsername(username);
+            return user !== null;
+        } catch (error: any) {
+            throw new Error(`Error verifying username: ${error.message}`);
+        }
+    }
 }

@@ -42,6 +42,21 @@ export const getUserById = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
+}
+
+
+export const checkUsername = async (req: Request, res: Response) => {
+  const { username } = req.query;
+  if (!username) {
+      return res.status(400).json({ message: "Username is required" });
+  }
+
+  try {
+      const exists = await userService.usernameExists(username as string);
+      res.json({ exists });
+  } catch (error: any) {
+      res.status(500).json({ message: `Error checking username: ${error.message}` });
+  }
 };
 
 export const createUser = async (req: Request, res: Response) => {
@@ -81,4 +96,5 @@ export const deleteUser = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
+  
 };
