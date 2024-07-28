@@ -46,6 +46,7 @@ export const getUserById = async (req: Request, res: Response) => {
 
 export const checkUsername = async (req: Request, res: Response) => {
   const { username } = req.body;
+  console.log("Received username:", username);
   if (!username) {
       return res.status(400).json({ message: "Username is required" });
   }
