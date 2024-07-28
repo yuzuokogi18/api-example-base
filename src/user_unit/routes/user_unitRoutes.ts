@@ -1,13 +1,12 @@
 import { Router } from 'express';
 import { getUserUnits, getUserUnitById, createUserUnit, updateUserUnit, deleteUserUnit } from '../controllers/user_unitcontrollers';
-import { authMiddleware } from '../../shared/middlewares/auth';
 
 const userUnitRoutes: Router = Router();
 
-userUnitRoutes.get('/', authMiddleware, getUserUnits);
-userUnitRoutes.get('/:user_unit_id', authMiddleware, getUserUnitById);
-userUnitRoutes.post('/', authMiddleware, createUserUnit);
-userUnitRoutes.put('/:user_unit_id', authMiddleware, updateUserUnit);
-userUnitRoutes.delete('/:user_unit_id', authMiddleware, deleteUserUnit);
+userUnitRoutes.get('/', getUserUnits);
+userUnitRoutes.get('/:user_unit_id', getUserUnitById);
+userUnitRoutes.post('/', createUserUnit);
+userUnitRoutes.put('/:user_unit_id', updateUserUnit);
+userUnitRoutes.delete('/:user_unit_id', deleteUserUnit);
 
 export default userUnitRoutes;
