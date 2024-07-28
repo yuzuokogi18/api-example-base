@@ -4,7 +4,7 @@ import { UserUnitService } from '../services/user_unitServices';
 export const getUserUnits = async (_req: Request, res: Response) => {
   try {
     const userUnits = await UserUnitService.getAllUserUnits();
-    if (userUnits.length > 0) {
+    if (userUnits) {
       res.status(200).json(userUnits);
     } else {
       res.status(404).json({ message: 'Sin registros' });
@@ -33,7 +33,7 @@ export const createUserUnit = async (req: Request, res: Response) => {
     if (newUserUnit) {
       res.status(201).json(newUserUnit);
     } else {
-      res.status(404).json({ message: 'Algo salió mal' });
+      res.status(404).json({ message: 'Algo salio mal' });
     }
   } catch (error: any) {
     res.status(500).json({ error: error.message });
@@ -46,7 +46,7 @@ export const updateUserUnit = async (req: Request, res: Response) => {
     if (updatedUserUnit) {
       res.status(200).json(updatedUserUnit);
     } else {
-      res.status(404).json({ message: 'Algo salió mal' });
+      res.status(404).json({ message: 'Algo salio mal' });
     }
   } catch (error: any) {
     res.status(500).json({ error: error.message });
@@ -59,7 +59,7 @@ export const deleteUserUnit = async (req: Request, res: Response) => {
     if (deleted) {
       res.status(200).json({ message: 'Se eliminó la user_unit.' });
     } else {
-      res.status(404).json({ message: 'Algo salió mal' });
+      res.status(404).json({ message: 'Algo salio mal' });
     }
   } catch (error: any) {
     res.status(500).json({ error: error.message });

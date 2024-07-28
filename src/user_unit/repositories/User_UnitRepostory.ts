@@ -3,6 +3,7 @@ import connection from '../../shared/config/database';
 import { User_Unit } from '../models/User_Unit';
 
 export class UserUnitRepository {
+
   public static async findAll(): Promise<User_Unit[]> {
     return new Promise((resolve, reject) => {
       connection.query('SELECT * FROM user_unit', (error: any, results) => {
