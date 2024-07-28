@@ -44,20 +44,7 @@ export const getUserById = async (req: Request, res: Response) => {
   }
 }
 
-export const checkUsername = async (req: Request, res: Response) => {
-  const { username } = req.body;
-  console.log("Received username:", username);
-  if (!username) {
-      return res.status(400).json({ message: "Username is required" });
-  }
 
-  try {
-      const exists = await userService.usernameExists(username);
-      res.json({ exists });
-  } catch (error: any) {
-      res.status(500).json({ message: `Error checking username: ${error.message}` });
-  }
-};
 
 export const createUser = async (req: Request, res: Response) => {
   try {
