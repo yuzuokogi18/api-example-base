@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getUsers, getUserById, createUser, updateUser, deleteUser, loginUser, checkUsername } from '../controllers/userControllers';
+import { getUsers, getUserById, createUser, updateUser, deleteUser, loginUser, getUserByUsername } from '../controllers/userControllers';
 import { authMiddleware } from '../../shared/middlewares/auth';
 
 const userRoutes: Router = Router();
@@ -8,8 +8,8 @@ userRoutes.post('/login', loginUser);
 
 userRoutes.get('/', getUsers);
 userRoutes.get('/:user_id', authMiddleware, getUserById);
+userRoutes.get('/search', getUserByUsername); // Ruta de búsqueda por nombre
 userRoutes.post('/', createUser);
-userRoutes.post('/check-username', checkUsername); // Corregido
 userRoutes.put('/:user_id', updateUser);
 userRoutes.delete('/:user_id', deleteUser);
 

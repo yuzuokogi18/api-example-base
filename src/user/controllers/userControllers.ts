@@ -31,6 +31,24 @@ export const getUsers = async (_req: Request, res: Response) => {
   }
 };
 
+export const getUserByUsername = async (req: Request, res: Response) => {
+  const { name } = req.query; // Obtiene el nombre del usuario desde la consulta
+  try {
+    if (typeof name === 'string') {
+      const user = await userService.getUserByUsername(name);
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    } else {
+      res.status(400).json({ message: 'Invalid query parameter' });
+    }
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export const getUserById = async (req: Request, res: Response) => {
   try {
     const user = await userService.getUserById(parseInt(req.params.user_id, 10));

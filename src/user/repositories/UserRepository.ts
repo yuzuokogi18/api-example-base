@@ -35,10 +35,7 @@ export class UserRepository {
   }
   public static async findByUsername(username: string): Promise<User | null> {
     return new Promise((resolve, reject) => {
-        const query = 'SELECT * FROM user WHERE username = ?';
-        console.log("Executing query:", query);
-        console.log("With parameters:", [username]);
-        connection.query(query, [username], (error, results) => {
+        connection.query('SELECT * FROM user WHERE username = ?', [username], (error: any, results) => {
             if (error) {
                 reject(error);
             } else {
@@ -51,8 +48,8 @@ export class UserRepository {
             }
         });
     });
+  }
 
-}
 
 
   public static async createUser(user: User): Promise<User> {
