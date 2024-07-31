@@ -1,10 +1,11 @@
 export interface Checker {
     checker_id: number;
-    user_id: number;
-    user_unit_id: number;
-    arrivaltime: string;
-    departuretime: string;
+    Datetime:string;
+    numeroUnidad:string;
+    nombreChecador:string;
+    direction:string;
+    date:string;
     created_at: string;
     updated_at: string;
-    deleted: boolean; 
+    deleted?: boolean; 
 }

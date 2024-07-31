@@ -79,4 +79,20 @@ export class UnitRepository {
       });
     });
   }
+  public static async findByUnitNumber(unitNumber: string): Promise<Unit | null> {
+    return new Promise((resolve, reject) => {
+      connection.query('SELECT * FROM unit WHERE numeroUnidad = ?', [unitNumber], (error: any, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          const units: Unit[] = results as Unit[];
+          if (units.length > 0) {
+            resolve(units[0]);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
 }

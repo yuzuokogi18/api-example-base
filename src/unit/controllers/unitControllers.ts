@@ -26,7 +26,18 @@ export const getUnitById = async (req: Request, res: Response) => {
     res.status(500).json({ error: error.message });
   }
 };
-
+export const getCheckerByUnitNumber = async (req: Request, res: Response) => {
+  try {
+    const checker = await UnitService.getCheckerByUnitNumber(req.params.unitNumber);
+    if (checker) {
+      res.status(200).json({ exists: true });
+    } else {
+      res.status(404).json({ exists: false });
+    }
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
 export const createUnit = async (req: Request, res: Response) => {
   try {
     const newUnit = await UnitService.addUnit(req.body);

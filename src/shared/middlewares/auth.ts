@@ -10,6 +10,7 @@ dotenv.config();
 const secretKey = process.env.SECRET || "";
 
 export const authMiddleware = async (req: userRequest, res: Response, next: NextFunction) => {
+  console.log('authMiddleware called'); // Log added
   const token = req.header('Authorization')?.replace('Bearer ', '');
 
   if (!token) {

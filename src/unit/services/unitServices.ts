@@ -63,4 +63,11 @@ export class UnitService {
             throw new Error(`Error al eliminar unidad: ${error.message}`);
         }
     }
+    public static async getCheckerByUnitNumber(unitNumber: string): Promise<Unit | null> {
+        try {
+          return await UnitRepository.findByUnitNumber(unitNumber);
+        } catch (error: any) {
+          throw new Error(`Error al encontrar checador por número de unidad: ${error.message}`);
+        }
+      }
 }

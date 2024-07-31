@@ -35,9 +35,9 @@ export class CheckerRepository {
   }
 
   public static async createChecker(checker: Checker): Promise<Checker> {
-    const query = 'INSERT INTO checker (user_id, user_unit_id, arrivaltime, departuretime, created_at, updated_at, deleted) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    const query = 'INSERT INTO checker (numeroUnidad, Datetime, nombreChecador, direction, date, created_at, updated_at, deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     return new Promise((resolve, reject) => {
-      connection.execute(query, [checker.user_id, checker.user_unit_id, checker.arrivaltime, checker.departuretime, checker.created_at, checker.updated_at, checker.deleted], (error, result: ResultSetHeader) => {
+      connection.execute(query, [checker.numeroUnidad, checker.Datetime, checker.nombreChecador, checker.direction, checker.date, checker.created_at, checker.updated_at, checker.deleted], (error, result: ResultSetHeader) => {
         if (error) {
           reject(error);
         } else {
@@ -50,9 +50,9 @@ export class CheckerRepository {
   }
 
   public static async updateChecker(checker_id: number, checkerData: Checker): Promise<Checker | null> {
-    const query = 'UPDATE checker SET user_id = ?, user_unit_id = ?, arrivaltime = ?, departuretime = ?, updated_at = ?, deleted = ? WHERE checker_id = ?';
+    const query = 'UPDATE checker SET numeroUnidad = ?, Datetime = ?, nombreChecador = ?, direction = ?, date = ?, updated_at = ?, deleted = ? WHERE checker_id = ?';
     return new Promise((resolve, reject) => {
-      connection.execute(query, [checkerData.user_id, checkerData.user_unit_id, checkerData.arrivaltime, checkerData.departuretime, checkerData.updated_at, checkerData.deleted, checker_id], (error, result: ResultSetHeader) => {
+      connection.execute(query, [checkerData.numeroUnidad, checkerData.Datetime, checkerData.nombreChecador, checkerData.direction, checkerData.date, checkerData.updated_at, checkerData.deleted, checker_id], (error, result: ResultSetHeader) => {
         if (error) {
           reject(error);
         } else {
@@ -79,4 +79,21 @@ export class CheckerRepository {
       });
     });
   }
+  public static async findByName(name: string): Promise<Checker | null> {
+    return new Promise((resolve, reject) => {
+      connection.query('SELECT * FROM checker WHERE nombreChecador = ?', [name], (error: any, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          const checkers: Checker[] = results as Checker[];
+          if (checkers.length > 0) {
+            resolve(checkers[0]);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+ 
 }

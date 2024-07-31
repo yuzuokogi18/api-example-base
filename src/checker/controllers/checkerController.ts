@@ -23,6 +23,19 @@ export const getCheckerById = async (req: Request, res: Response) => {
   }
 };
 
+export const getCheckerByName = async (req: Request, res: Response) => {
+  try {
+    const checker = await CheckerService.getCheckerByName(req.params.name);
+    if (checker) {
+      res.status(200).json({ exists: true });
+    } else {
+      res.status(404).json({ exists: false });
+    }
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export const createChecker = async (req: Request, res: Response) => {
   try {
     const newChecker = await CheckerService.addChecker(req.body);
@@ -31,7 +44,6 @@ export const createChecker = async (req: Request, res: Response) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 export const updateChecker = async (req: Request, res: Response) => {
   try {
     const updatedChecker = await CheckerService.modifyChecker(parseInt(req.params.checker_id, 10), req.body);

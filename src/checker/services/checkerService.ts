@@ -18,26 +18,33 @@ export class CheckerService {
       throw new Error(`Error al encontrar checador: ${error.message}`);
     }
   }
-
   public static async addChecker(checker: Checker): Promise<Checker> {
     try {
-      checker.created_at = DateUtils.formatDate(new Date());
-      checker.updated_at = DateUtils.formatDate(new Date());
-      return await CheckerRepository.createChecker(checker);
+        // Asegúrate de que 'date' esté en formato correcto
+        const date = new Date(checker.date);
+        checker.date = date.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+
+        checker.created_at = DateUtils.formatDate(new Date());
+        checker.updated_at = DateUtils.formatDate(new Date());
+        checker.deleted = false;
+
+        return await CheckerRepository.createChecker(checker);
     } catch (error: any) {
-      throw new Error(`Error al crear checador: ${error.message}`);
+        throw new Error(`Error al crear checador: ${error.message}`);
     }
-  }
+}
+
 
   public static async modifyChecker(checkerId: number, checkerData: Checker): Promise<Checker | null> {
     try {
       const checkerFound = await CheckerRepository.findById(checkerId);
 
       if (checkerFound) {
-        if (checkerData.user_id) checkerFound.user_id = checkerData.user_id;
-        if (checkerData.user_unit_id) checkerFound.user_unit_id = checkerData.user_unit_id;
-        if (checkerData.arrivaltime) checkerFound.arrivaltime = checkerData.arrivaltime;
-        if (checkerData.departuretime) checkerFound.departuretime = checkerData.departuretime;
+        if (checkerData.numeroUnidad) checkerFound.numeroUnidad = checkerData.numeroUnidad;
+        if (checkerData.Datetime) checkerFound.Datetime = checkerData.Datetime;
+        if (checkerData.nombreChecador) checkerFound.nombreChecador = checkerData.nombreChecador;
+        if (checkerData.direction) checkerFound.direction = checkerData.direction;
+        if (checkerData.date) checkerFound.date = checkerData.date;
         if (checkerData.deleted !== undefined) checkerFound.deleted = checkerData.deleted;
         
         checkerFound.updated_at = DateUtils.formatDate(new Date());
@@ -57,4 +64,12 @@ export class CheckerService {
       throw new Error(`Error al eliminar checador: ${error.message}`);
     }
   }
+  public static async getCheckerByName(name: string): Promise<Checker | null> {
+    try {
+      return await CheckerRepository.findByName(name);
+    } catch (error: any) {
+      throw new Error(`Error al encontrar checador por nombre: ${error.message}`);
+    }
+  }
+
 }
